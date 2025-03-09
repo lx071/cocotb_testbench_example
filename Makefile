@@ -16,7 +16,10 @@ VERILOG_SOURCES += $(PWD)/mcdt.v
 TOPLEVEL = mcdt
 
 # MODULE is the basename of the Python test file
-MODULE = test_my_design_v3
+MODULE = tb
 
 # include cocotb's make rules to take care of the simulator setup
 include $(shell cocotb-config --makefiles)/Makefile.sim
+
+cleanall:
+	rm -rf sim_build __pycache__ *.xml
