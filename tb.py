@@ -5,7 +5,7 @@
 
 import cocotb
 from cocotb.triggers import Timer
-from cocotb.triggers import FallingEdge,RisingEdge
+from cocotb.triggers import FallingEdge, RisingEdge
 from queue import Queue
 from cocotb.simulator import *
 
@@ -103,7 +103,7 @@ class driver:
 
             intf.ch_valid.value = 1
             intf.chnl_data.value = t.data[i]
-            cocotb.log.info("%s %s drivered channle data %8x", time_ns, self.name, t.data[i])
+            cocotb.log.info("%s %s drivered channel data %8x", time_ns, self.name, t.data[i])
             await FallingEdge(intf.clk)
             while intf.ch_ready.value != 1:
                 await RisingEdge(intf.clk)
@@ -152,7 +152,7 @@ class chnl_monitor:
             self.mon_mb.put(m)
             
             time_ns = get_sim_time()
-            cocotb.log.info("%s %s monitored channle data %8x", time_ns, self.name, m.data)
+            cocotb.log.info("%s %s monitored channel data %8x", time_ns, self.name, m.data)
             
     def set_interface(self, intf):
         self.intf = intf
