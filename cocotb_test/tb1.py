@@ -14,9 +14,9 @@ class chnl_trans:
     def __init__(self, ch_id, pkt_id):
         self.ch_id = ch_id
         self.pkt_id = pkt_id
-        self.data_nidles = 0
+        self.data_nidles = 1
         self.pkt_nidles = 1
-        self.data_size = 10000
+        self.data_size = 100000
         
         data = [1] * self.data_size
         for i in range(len(data)):

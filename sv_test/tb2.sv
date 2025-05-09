@@ -123,7 +123,8 @@ end
 // data test
 initial begin 
   
-  int num = 10000;
+  int num = 400000;
+  int id = 0;
 
   @(posedge rstn);
   repeat(5) @(posedge clk);
@@ -134,20 +135,39 @@ initial begin
   chnl1_init.set_name("chnl1_init");
   chnl2_init.set_name("chnl2_init");
 
+  //fork_join
   fork
     repeat(num) begin
-      chnl0_init.chnl_write(chnl0_gen.get_data());      
+      chnl0_init.chnl_write(chnl0_gen.get_data());  
+      chnl0_init.chnl_idle();     
     end
-    chnl0_init.chnl_idle(); 
     repeat(num) begin
-      chnl1_init.chnl_write(chnl1_gen.get_data());      
+      chnl1_init.chnl_write(chnl1_gen.get_data());
+      chnl1_init.chnl_idle();
     end
-    chnl1_init.chnl_idle(); 
     repeat(num) begin
-      chnl2_init.chnl_write(chnl2_gen.get_data());      
+      chnl2_init.chnl_write(chnl2_gen.get_data());
+      chnl2_init.chnl_idle();
     end
-    chnl2_init.chnl_idle(); 
   join
+
+  /*
+  for(int i = 0; i < num; i ++) begin
+    id = i % 3;
+    if(id == 0) begin
+      chnl0_init.chnl_write(chnl0_gen.get_data());  
+      chnl0_init.chnl_idle();     
+    end
+    else if(id == 1) begin
+      chnl1_init.chnl_write(chnl1_gen.get_data());
+      chnl1_init.chnl_idle();
+    end
+    else if(id == 2) begin
+      chnl2_init.chnl_write(chnl2_gen.get_data());
+      chnl2_init.chnl_idle();
+    end
+  end
+  */
   $finish();
 end
 
