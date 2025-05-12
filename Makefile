@@ -7,9 +7,9 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 
-VERILOG_SOURCES += $(PWD)/arbiter.v
-VERILOG_SOURCES += $(PWD)/slave_fifo.v
-VERILOG_SOURCES += $(PWD)/mcdt.v
+VERILOG_SOURCES += $(PWD)/hdl1/arbiter.v
+VERILOG_SOURCES += $(PWD)/hdl1/slave_fifo.v
+VERILOG_SOURCES += $(PWD)/hdl1/mcdt.v
 # use VHDL_SOURCES for VHDL files
 
 # TOPLEVEL is the name of the toplevel module in your Verilog or VHDL file

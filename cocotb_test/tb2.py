@@ -16,7 +16,7 @@ class chnl_trans:
         self.pkt_id = pkt_id
         self.data_nidles = 1
         self.pkt_nidles = 1
-        self.data_size = 1000
+        self.data_size = 100
         
         data = [1] * self.data_size
         for i in range(len(data)):
@@ -57,26 +57,26 @@ class driver:
         for i in range(num):
             await RisingEdge(dut.clk_i)
             if t.ch_id == 0:
-                dut.ch0_valid_i.value = 1
+                dut.ch0_vld_i.value = 1
                 dut.ch0_data_i.value = t.data[i];
                 await FallingEdge(dut.clk_i)
                 while dut.ch0_ready_o != 1:
                     await RisingEdge(dut.clk_i)
             elif t.ch_id == 1:
-                dut.ch1_valid_i.value = 1
+                dut.ch1_vld_i.value = 1
                 dut.ch1_data_i.value = t.data[i];
                 await FallingEdge(dut.clk_i)
                 while dut.ch1_ready_o != 1:
                     await RisingEdge(dut.clk_i)
             elif t.ch_id == 2:
-                dut.ch2_valid_i.value = 1
+                dut.ch2_vld_i.value = 1
                 dut.ch2_data_i.value = t.data[i];
                 await FallingEdge(dut.clk_i)
                 while dut.ch2_ready_o != 1:
                     await RisingEdge(dut.clk_i)
             # $display("%t channel initial [%s] sent data %x", $time, name, data);
             time_ns = get_sim_time()
-            # cocotb.log.info("%s channel initial [%s] sent data %x", time_ns, self.ch_id, t.data[i])
+            cocotb.log.info("%s channel initial [%s] sent data %x", time_ns, self.ch_id, t.data[i])
             # dut._log.info("%s channel initial [%s] sent data %x", time_ns, self.ch_id, t.data[i])
 
             for i in range(t.data_nidles):
@@ -89,13 +89,13 @@ class driver:
     async def chnl_idle(self, dut, t):
         await RisingEdge(dut.clk_i)
         if t.ch_id == 0:
-            dut.ch0_valid_i.value = 0
+            dut.ch0_vld_i.value = 0
             dut.ch0_data_i.value = 0
         elif t.ch_id == 1:
-            dut.ch1_valid_i.value = 0
+            dut.ch1_vld_i.value = 0
             dut.ch1_data_i.value = 0
         elif t.ch_id == 2:
-            dut.ch2_valid_i.value = 0
+            dut.ch2_vld_i.value = 0
             dut.ch2_data_i.value = 0
         
         

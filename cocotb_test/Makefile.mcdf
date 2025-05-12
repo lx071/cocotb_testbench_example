@@ -7,16 +7,19 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 
-VERILOG_SOURCES += $(PWD)/../hdl1/arbiter.v
-VERILOG_SOURCES += $(PWD)/../hdl1/slave_fifo.v
-VERILOG_SOURCES += $(PWD)/../hdl1/mcdt.v
+VERILOG_SOURCES += $(PWD)/../hdl2/arbiter.v
+VERILOG_SOURCES += $(PWD)/../hdl2/formater.v
+VERILOG_SOURCES += $(PWD)/../hdl2/mcdf.v
+VERILOG_SOURCES += $(PWD)/../hdl2/reg.v
+VERILOG_SOURCES += $(PWD)/../hdl2/slave_fifo.v
+VERILOG_INCLUDE_DIRS = $(PWD)/../hdl2
 # use VHDL_SOURCES for VHDL files
 
 # TOPLEVEL is the name of the toplevel module in your Verilog or VHDL file
-TOPLEVEL = mcdt
+TOPLEVEL = mcdf
 
 # MODULE is the basename of the Python test file
-MODULE = tb1
+MODULE = tb2
 
 # include cocotb's make rules to take care of the simulator setup
 include $(shell cocotb-config --makefiles)/Makefile.sim
